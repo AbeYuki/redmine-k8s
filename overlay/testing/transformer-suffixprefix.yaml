@@ -1,0 +1,20 @@
+apiVersion: builtin
+kind: PrefixSuffixTransformer
+metadata:
+  name: prefixsuffix-transformer
+prefix: testing-redmine-
+suffix: "-001"
+fieldSpecs:
+  - path: metadata/name
+  - path: spec/template/spec/containers/name
+    kind: Deployment
+  - path: spec/template/spec/containers/env/valueFrom/secretKeyRef/name
+    kind: Deployment
+  - path: spec/acme/privateKeySecretRef/name
+    kind: ClusterIssuer
+  - path: spec/tls/secretName
+    kind: Ingress
+  - path: data/REDMINE_DB_MYSQL
+    kind: ConfigMap
+  - path: metadata/annotations/cert-manager.io\/cluster-issuer
+    kins: Ingress

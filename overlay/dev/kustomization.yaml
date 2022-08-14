@@ -1,0 +1,53 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dev-redmine
+bases:
+- ../../base
+configMapGenerator:
+- name: template-config
+  literals:
+  - MYSQL_DATABASE=redmine
+  - MYSQL_USER=redmine
+  - REDMINE_DB_MYSQL=backend-db01
+  - REDMINE_DB_USERNAME=redmine
+  - REDMINE_DB_DATABASE=redmine
+transformers:
+- transformer-labels.yaml
+- transformer-suffixprefix.yaml
+images:
+  - name: frontend-app01
+    newName: redmine
+    newTag: "5.0.2"
+  - name: backend-db01
+    newName: mariadb
+    newTag: "10.5"
+replicas:
+- name: frontend-app01
+  count: 1
+patchesStrategicMerge:
+- |-
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: frontend-app01
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: longhorn
+    volumeMode: Filesystem
+- |-
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: backend-db01
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: longhorn
+    volumeMode: Filesystem
