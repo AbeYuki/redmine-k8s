@@ -69,19 +69,6 @@ patchesStrategicMerge:
   apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
-    name: frontend-app04
-  spec:
-    accessModes:
-    - ReadWriteMany
-    resources:
-      requests:
-        storage: 1Gi
-    storageClassName: longhorn
-    volumeMode: Filesystem
-- |-
-  apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
     name: backend-db01
   spec:
     accessModes:

@@ -14,6 +14,8 @@ fieldSpecs:
     kind: Deployment
   - path: spec/template/spec/volumes/name
     kind: Deployment
+  - path: spec/template/spec/volumes/projected/sources/configMap/name
+    kind: Deployment
   - path: spec/acme/privateKeySecretRef/name
     kind: ClusterIssuer
   - path: spec/tls/secretName
