@@ -161,3 +161,7 @@ spec:
       - name: frontend-app03
         persistentVolumeClaim:
           claimName: frontend-app03
+      - name: frontend-app04
+        persistentVolumeClaim:
+          claimName: frontend-app04
+      
