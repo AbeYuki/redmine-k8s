@@ -10,6 +10,10 @@ fieldSpecs:
     kind: Deployment
   - path: spec/template/spec/containers/env/valueFrom/secretKeyRef/name
     kind: Deployment
+  - path: spec/template/spec/containers/volumeMounts/name
+    kind: Deployment
+  - path: spec/template/spec/volumes/name
+    kind: Deployment
   - path: spec/acme/privateKeySecretRef/name
     kind: ClusterIssuer
   - path: spec/tls/secretName

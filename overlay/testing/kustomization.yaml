@@ -11,6 +11,7 @@ configMapGenerator:
   - REDMINE_DB_MYSQL=backend-db01
   - REDMINE_DB_USERNAME=redmine
   - REDMINE_DB_DATABASE=redmine
+  - REDMINE_PLUGINS_MIGRATE=true
 transformers:
 - transformer-labels.yaml
 - transformer-suffixprefix.yaml
