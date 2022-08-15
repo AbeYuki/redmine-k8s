@@ -27,6 +27,38 @@ spec:
   volumeMode: Filesystem
   storageClassName: longhorn
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: frontend-app02
+  labels:
+    app.kubernetes.io/name: redmine-app
+    app.kubernetes.io/component: server
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: frontend-app03
+  labels:
+    app.kubernetes.io/name: redmine-app
+    app.kubernetes.io/component: server
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: longhorn
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -80,6 +112,11 @@ spec:
             configMapKeyRef:
               name: template-config
               key: REDMINE_DB_USERNAME
+        - name: REDMINE_PLUGINS_MIGRATE
+          valueFrom:
+            configMapKeyRef:
+              name: template-config
+              key: REDMINE_PLUGINS_MIGRATE
         resources:
           limits:
             memory: 512Mi
@@ -92,10 +129,17 @@ spec:
         volumeMounts:
         - name: frontend-app01
           mountPath: /usr/src/redmine/files
+        - name: frontend-app02
+          mountPath: /usr/src/redmine/plugins
+        - name: frontend-app03
+          mountPath: /usr/src/redmine/thema
       volumes:
       - name: frontend-app01
         persistentVolumeClaim:
           claimName: frontend-app01
-      - name: configuration
-        configMap:
-          name: redmine-configuration
+      - name: frontend-app02
+        persistentVolumeClaim:
+          claimName: frontend-app02
+      - name: frontend-app03
+        persistentVolumeClaim:
+          claimName: frontend-app03
