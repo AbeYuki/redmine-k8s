@@ -18,7 +18,7 @@ transformers:
 images:
   - name: frontend-app01
     newName: redmine
-    newTag: "5.0.2"
+    newTag: "5.0.3"
   - name: backend-db01
     newName: mariadb
     newTag: "10.5"
