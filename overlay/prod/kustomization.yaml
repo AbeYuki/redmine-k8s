@@ -33,7 +33,7 @@ patchesStrategicMerge:
     name: frontend-app01
   spec:
     accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
     resources:
       requests:
         storage: 3Gi
@@ -46,7 +46,7 @@ patchesStrategicMerge:
     name: frontend-app02
   spec:
     accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
     resources:
       requests:
         storage: 1Gi
@@ -59,7 +59,7 @@ patchesStrategicMerge:
     name: frontend-app03
   spec:
     accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
     resources:
       requests:
         storage: 1Gi
@@ -72,7 +72,7 @@ patchesStrategicMerge:
     name: backend-db01
   spec:
     accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
     resources:
       requests:
         storage: 5Gi
