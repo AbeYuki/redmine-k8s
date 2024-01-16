@@ -3,13 +3,11 @@ redmine with kubernetes
 
 
 # Quick start
-環境ごとに用意されている kustomize があるディレクトリに移動  
 ```
-cd overlay/dev/
+minikube start --cpus 3 --memory 5G
 ```
-password ファイル作成
 ```
-echo -n 'password' > secret/password.txt
+cd overlay/testing/
 ```
 deploy secret
 ```
@@ -19,6 +17,11 @@ deploy resources
 ```
 kubectl apply -k ./
 ```
+port-forward
+```
+kubectl port-forward -n testing-redmine service/testing-redmine-frontend-app01-001 8080:80
+```
+http://127.0.0.1:8080
 
 # Note
 migrate に時間を要するので pods が running 状態になってから数分まって web に接続してください。
