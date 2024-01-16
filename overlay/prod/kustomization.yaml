@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: prod-redmine
-bases:
-- ../../base
+resources:
+  - ../../base
 configMapGenerator:
 - name: template-config
   literals:
@@ -25,56 +25,73 @@ images:
 replicas:
 - name: frontend-app01
   count: 1
-patchesStrategicMerge:
-- |-
-  apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    name: frontend-app01
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 3Gi
-    storageClassName: longhorn
-    volumeMode: Filesystem
-- |-
-  apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    name: frontend-app02
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 1Gi
-    storageClassName: longhorn
-    volumeMode: Filesystem
-- |-
-  apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    name: frontend-app03
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 1Gi
-    storageClassName: longhorn
-    volumeMode: Filesystem
-- |-
-  apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    name: backend-db01
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: 5Gi
-    storageClassName: longhorn
-    volumeMode: Filesystem
+patches:
+### storage ###
+  - target:
+      version: v1
+      kind: PersistentVolumeClaim
+      name: frontend-app01
+    patch: |-
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: frontend-app01
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 3Gi
+        storageClassName: longhorn
+        volumeMode: Filesystem
+  - target:
+      version: v1
+      kind: PersistentVolumeClaim
+      name: frontend-app02
+    patch: |-
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: frontend-app02
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: longhorn
+        volumeMode: Filesystem
+  - target:
+      version: v1
+      kind: PersistentVolumeClaim
+      name: frontend-app03
+    patch: |-
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: frontend-app03
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: longhorn
+        volumeMode: Filesystem
+  - target:
+      version: v1
+      kind: PersistentVolumeClaim
+      name: backend-db01
+    patch: |-
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: backend-db01
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+        storageClassName: longhorn
+        volumeMode: Filesystem
