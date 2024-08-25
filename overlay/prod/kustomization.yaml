@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: redmine
 resources:
   - ../../base
+  - secret-avp.yaml
 configMapGenerator:
 - name: template-config
   literals:
