@@ -2,7 +2,7 @@ apiVersion: builtin
 kind: PrefixSuffixTransformer
 metadata:
   name: prefixsuffix-transformer
-prefix: testing-redmine-
+prefix: redmine-
 suffix: "-001"
 fieldSpecs:
   - path: metadata/name

@@ -83,7 +83,9 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: template-config
-              key: MYSQL_USER  
+              key: MYSQL_USER
+        - name: TZ
+          value: "Asia/Tokyo"
         resources:
           limits:
             memory: 512Mi

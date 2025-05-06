@@ -117,6 +117,8 @@ spec:
             configMapKeyRef:
               name: template-config
               key: REDMINE_PLUGINS_MIGRATE
+        - name: TZ
+          value: "Asia/Tokyo"
         resources:
           limits:
             memory: 512Mi
